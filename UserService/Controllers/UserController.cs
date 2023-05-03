@@ -1,5 +1,9 @@
-﻿namespace UserService.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 
+namespace UserService.Controllers;
+
+[ApiController]
+[Route("[controller]")]
 public class UserController
 {
     
