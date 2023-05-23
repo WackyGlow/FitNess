@@ -9,14 +9,15 @@ namespace UserService.Controllers
     public class UserController : ControllerBase
     {
         public UserDatabase _UserDatabase = new UserDatabase();
-        
-        /* HTTP Method: GET
-         * Route: /user/{id}
-         * Description: Retrieves a user by their ID.
-         * Returns:
-            - If the user is found, returns HTTP status code 200 (OK) with the user data.
-            - If the user is not found, returns HTTP status code 404 (Not Found).
-         */
+
+        /// <summary>
+        /// Retrieves a user by their ID.
+        /// </summary>
+        /// <param name="id">The ID of the user.</param>
+        /// <returns>
+        /// If the user is found, returns HTTP status code 200 (OK) with the user data.
+        /// If the user is not found, returns HTTP status code 404 (Not Found).
+        /// </returns>
         [HttpGet("{id}")]
         public IActionResult GetUser(string id)
         {
@@ -29,46 +30,57 @@ namespace UserService.Controllers
             }
             return Ok(user);
         }
-        
-        /* HTTP Method: POST
-         * Route: /user
-         * Description: Create a new user.
-         * Parameters:
-            'user' (request body): The user data to be created.
-         * Returns:
-            - If the user is successfully created, returns HTTP status code 200 (OK).
-         */
+
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="user">The User object representing the user to create.</param>
+        /// <returns>
+        /// Returns an IActionResult representing the HTTP response.
+        ///  - If the user is successfully created, returns HTTP status code 200 (OK).
+        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
+        /// </returns>
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
         {
             // Create user logic here
             // Replace with your actual implementation
+
+            // Insert the user into the database
             _UserDatabase.CreateUser(user);
+
+            // Return HTTP status code 200 (OK) to indicate successful user creation
             return Ok();
         }
 
-        /* HTTP Method: PUT
-         * Route: /user/{id}
-         * Description: Updates an existing user by their ID.
-         * Parameters:
-            'id' (route parameter): The ID of the user to be updated.
-            'user' (request body): The updated user data.
-         * Returns:
-            - If the user is found and successfully updated, returns HTTP status code 200 (OK).
-            - If the user is not found, returns HTTP status code 404 (Not Found).
-         */
+        /// <summary>
+        /// Updates an existing user by their ID.
+        /// </summary>
+        /// <param name="id">The ID of the user to update.</param>
+        /// <param name="user">The User object representing the updated user.</param>
+        /// <returns>
+        /// Returns an IActionResult representing the HTTP response.
+        ///  - If the user is found and successfully updated, returns HTTP status code 200 (OK).
+        ///  - If the user is not found, returns HTTP status code 404 (Not Found).
+        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
+        /// </returns>
         [HttpPut("{id}")]
         public IActionResult UpdateUser(string id, [FromBody] User user)
         {
             // Update user logic here
             // Replace with your actual implementation
+
+            // Get the existing user from the database
             var existingUser = _UserDatabase.GetUserById(id);
+
+            // Check if the user exists
             if (existingUser == null)
             {
+                // Return HTTP status code 404 (Not Found) if the user is not found
                 return NotFound();
             }
-        
-            // Update relevant properties
+
+            // Update the relevant properties of the existing user
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.Age = user.Age;
@@ -76,34 +88,47 @@ namespace UserService.Controllers
             existingUser.Weight = user.Weight;
             existingUser.DesiredWeight = user.DesiredWeight;
 
-            _UserDatabase.UpdateUser(id, existingUser); // Save the updated user
+            // Update the user in the database
+            _UserDatabase.UpdateUser(id, existingUser);
+
+            // Return HTTP status code 200 (OK) to indicate successful user update
             return Ok();
         }
-        // DELETE: /user/{id}
-        /* HTTP Method: DELETE
-         * Route: /user/{id}
-         * Description: Deletes an existing user.
-         * Parameters:
-            'user' (request body): The user to be deleted.
-         * Returns:
-            - If the user is found and successfully deleted, returns HTTP status code 200 (OK).
-            - If the user is not found, returns HTTP status code 404 (Not Found).
-         */
+
+        /// <summary>
+        /// Deletes an existing user.
+        /// </summary>
+        /// <param name="user">The User object representing the user to delete.</param>
+        /// <returns>
+        /// Returns an IActionResult representing the HTTP response.
+        ///  - If the user is found and successfully deleted, returns HTTP status code 200 (OK).
+        ///  - If the user is not found, returns HTTP status code 404 (Not Found).
+        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
+        /// </returns>
         [HttpDelete]
         public IActionResult DeleteUser(User user)
         {
             // Delete user logic here
             // Replace with your actual implementation
+
+            // Get the existing user from the database
             var existingUser = user;
+
+            // Check if the user exists
             if (existingUser == null)
             {
+                // Return HTTP status code 404 (Not Found) if the user is not found
                 return NotFound();
             }
+
+            // Delete the user from the database
             _UserDatabase.DeleteUser(user);
+
+            // Return HTTP status code 200 (OK) to indicate successful user deletion
             return Ok();
         }
 
         // Placeholder methods, replace with actual implementation
-        
+
     }
 }
