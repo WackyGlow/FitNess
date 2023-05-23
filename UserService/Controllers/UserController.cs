@@ -21,7 +21,7 @@ namespace UserService.Controllers
         ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
         /// </returns>
         [HttpGet("{id}")]
-        public IActionResult GetUser(string id)
+        public IActionResult GetUser(int id)
         {
             // Retrieve user logic here
             // Replace with your actual implementation
@@ -74,7 +74,7 @@ namespace UserService.Controllers
         ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
         /// </returns>
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(string id, [FromBody] User user)
+        public IActionResult UpdateUser(int id, [FromBody] User user)
         {
             // Update user logic here
             // Replace with your actual implementation

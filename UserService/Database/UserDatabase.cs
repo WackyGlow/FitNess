@@ -17,10 +17,10 @@ public class UserDatabase
         // Connect to the MongoDB database
         var connectionString = "mongodb+srv://rasm92i3:<P@n1cb0y5>@cluster0.te79kwa.mongodb.net/?retryWrites=true&w=majority";
         var client = new MongoClient(connectionString);
-        var database = client.GetDatabase("FitNess");
+        var database = client.GetDatabase("UserServiceDB");
 
         // Initialize the collection for users
-        _users = database.GetCollection<User>("users");
+        _users = database.GetCollection<User>("UserCollection");
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class UserDatabase
     /// <returns>
     /// Returns a User object representing the user with the specified ID, or null if the user is not found.
     /// </returns>
-    public User GetUserById(string id)
+    public User GetUserById(int id)
     {
         // Retrieve the user from the database by their ID
         var user = _users.Find<User>(user => user.Id == id).FirstOrDefault();
@@ -75,7 +75,7 @@ public class UserDatabase
     /// </summary>
     /// <param name="id">The ID of the user to update.</param>
     /// <param name="userIn">The User object representing the updated user data.</param>
-    public void UpdateUser(string id, User userIn)
+    public void UpdateUser(int id, User userIn)
     {
         // Update the user in the database based on the provided ID
         _users.ReplaceOne(user => user.Id == id, userIn);
