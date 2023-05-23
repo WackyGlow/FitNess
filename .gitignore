@@ -424,3 +424,6 @@ Common/obj/project.assets.json
 Common/obj/project.nuget.cache
 .vs/FitNess/FileContentIndex/178f5301-3637-4c55-8a29-53a3e8a0f695.vsidx
 .vs/FitNess/FileContentIndex/1699b93c-14a7-4ef5-8062-de11dcb05f6d.vsidx
+NutritionService/NutritionService.csproj
+UserService/UserService.csproj
+WorkoutService/WorkoutService.csproj
