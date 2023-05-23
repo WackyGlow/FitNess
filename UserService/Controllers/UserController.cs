@@ -10,7 +10,13 @@ namespace UserService.Controllers
     {
         public UserDatabase _UserDatabase = new UserDatabase();
         
-        // GET: /user/{id}
+        /* HTTP Method: GET
+         * Route: /user/{id}
+         * Description: Retrieves a user by their ID.
+         * Returns:
+            If the user is found, returns HTTP status code 200 (OK) with the user data.
+            If the user is not found, returns HTTP status code 404 (Not Found).
+         */
         [HttpGet("{id}")]
         public IActionResult GetUser(string id)
         {
@@ -23,8 +29,15 @@ namespace UserService.Controllers
             }
             return Ok(user);
         }
-
-        // POST: /user
+        
+        /* HTTP Method: POST
+         * Route: /user
+         * Description: Create a new user.
+         * Parameters:
+            'user' (request body): The user data to be created.
+         * Returns:
+            If the user is successfully created, returns HTTP status code 200 (OK).
+         */
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
         {
@@ -34,7 +47,16 @@ namespace UserService.Controllers
             return Ok();
         }
 
-        // PUT: /user/{id}
+        /* HTTP Method: PUT
+         * Route: /user/{id}
+         * Description: Updates an existing user by their ID.
+         * Parameters:
+            'id' (route parameter): The ID of the user to be updated.
+            'user' (request body): The updated user data.
+         * Returns:
+            If the user is found and successfully updated, returns HTTP status code 200 (OK).
+            If the user is not found, returns HTTP status code 404 (Not Found).
+         */
         [HttpPut("{id}")]
         public IActionResult UpdateUser(string id, [FromBody] User user)
         {
@@ -58,6 +80,15 @@ namespace UserService.Controllers
             return Ok();
         }
         // DELETE: /user/{id}
+        /* HTTP Method: DELETE
+         * Route: /user/{id}
+         * Description: Deletes an existing user.
+         * Parameters:
+            'user' (request body): The user to be deleted.
+         * Returns:
+            If the user is found and successfully deleted, returns HTTP status code 200 (OK).
+            If the user is not found, returns HTTP status code 404 (Not Found).
+         */
         [HttpDelete]
         public IActionResult DeleteUser(User user)
         {
