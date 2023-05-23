@@ -406,3 +406,11 @@ ASALocalRun/
 .vs/slnx.sqlite
 .vs/SearchEngine-Baseline/FileContentIndex/95bc6f48-ef37-47ba-a520-22576aa60842.vsidx
 .vs/SearchEngine-Baseline/FileContentIndex/8d8eae63-c6d7-4165-bee7-33153413125c.vsidx
+WorkoutService/obj/Debug/net7.0/WorkoutService.GeneratedMSBuildEditorConfig.editorconfig
+WorkoutService/obj/Debug/net7.0/WorkoutService.assets.cache
+UserService/obj/Debug/net7.0/UserService.GeneratedMSBuildEditorConfig.editorconfig
+UserService/obj/Debug/net7.0/UserService.assets.cache
+NutritionService/obj/Debug/net7.0/NutritionService.GeneratedMSBuildEditorConfig.editorconfig
+NutritionService/obj/Debug/net7.0/NutritionService.assets.cache
+Common/obj/Debug/net6.0/Common.GeneratedMSBuildEditorConfig.editorconfig
+Common/obj/Debug/net6.0/Common.assets.cache
