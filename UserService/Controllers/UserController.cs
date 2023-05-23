@@ -15,19 +15,28 @@ namespace UserService.Controllers
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <returns>
-        /// If the user is found, returns HTTP status code 200 (OK) with the user data.
-        /// If the user is not found, returns HTTP status code 404 (Not Found).
+        /// Returns an IActionResult representing the HTTP response.
+        ///  - If the user is found, returns HTTP status code 200 (OK) with the user data.
+        ///  - If the user is not found, returns HTTP status code 404 (Not Found).
+        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
         /// </returns>
         [HttpGet("{id}")]
         public IActionResult GetUser(string id)
         {
             // Retrieve user logic here
             // Replace with your actual implementation
+
+            // Get the user from the UserDatabase using the provided ID
             var user = _UserDatabase.GetUserById(id);
+
+            // Check if the user exists
             if (user == null)
             {
+                // Return HTTP status code 404 (Not Found) if the user is not found
                 return NotFound();
             }
+
+            // Return HTTP status code 200 (OK) with the user data
             return Ok(user);
         }
 
