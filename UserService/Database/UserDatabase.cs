@@ -15,7 +15,9 @@ public class UserDatabase
     public UserDatabase()
     {
         // Connect to the MongoDB database
-        var connectionString = "mongodb+srv://rasm92i3:<P@n1cb0y5>@cluster0.te79kwa.mongodb.net/?retryWrites=true&w=majority";
+        //var connectionString = "mongodb+srv://rasm92i3:" + Uri.EscapeDataString("12344321") +
+        //    "@cluster0.te79kwa.mongodb.net/?retryWrites=true&w=majority&authMechanism=SCRAM-SHA-256";
+        var connectionString = "mongodb+srv://rasm92i3:flaskebong420@cluster0.te79kwa.mongodb.net/";
         var client = new MongoClient(connectionString);
         var database = client.GetDatabase("UserServiceDB");
 
