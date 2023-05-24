@@ -7,7 +7,7 @@ using static UserService.Infrastructure.MessagePublisher;
 var builder = WebApplication.CreateBuilder(args);
 
 string cloudAMQPConnectionString =
-   "amqps://cmcbjlme:aF-QmhuXS-dFiVX8SMUDzYLk0v9dGO8i@hawk.rmq.cloudamqp.com/cmcbjlme\r\n";
+   "amqps://cmcbjlme:aF-QmhuXS-dFiVX8SMUDzYLk0v9dGO8i@hawk.rmq.cloudamqp.com/cmcbjlme";
 
 // Add services to the container.
 
