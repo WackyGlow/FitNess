@@ -44,7 +44,7 @@ namespace UserService.Controllers
             }
 
             // Publish PublishCalorieIntakeCreatedMessage. 
-            _UserMessagePublisher.
+            _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
 
             // Return HTTP status code 200 (OK) with the user data
             return Ok(user);

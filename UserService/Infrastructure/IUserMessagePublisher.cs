@@ -5,9 +5,6 @@ namespace UserService.Infrastructure
 {
     public interface IUserMessagePublisher
     {
-        public interface IUserMessagePublisher
-        {
-            void PublishCalorieIntakeCreatedMessage(User user);
-        }
+        void PublishCalorieIntakeCreatedMessage(User user);
     }
 }
