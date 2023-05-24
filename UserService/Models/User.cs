@@ -9,8 +9,6 @@ public class User
     public string Sex { get; set; }
     public double Weight { get; set; }
     public double DesiredWeight { get; set; }
-    
     public double Height { get; set; }
-    
     public double WeightLossPerWeek { get; set; }
 }
