@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserService.Database;
+using UserService.Infrastructure;
 using UserService.Models;
 
 namespace UserService.Controllers
@@ -9,6 +10,12 @@ namespace UserService.Controllers
     public class UserController : ControllerBase
     {
         public UserDatabase _UserDatabase = new UserDatabase();
+        IUserMessagePublisher _UserMessagePublisher;
+
+        public UserController(IUserMessagePublisher publisher)
+        {
+            _UserMessagePublisher = publisher;
+        }
 
         /// <summary>
         /// Retrieves a user by their ID.
@@ -35,6 +42,9 @@ namespace UserService.Controllers
                 // Return HTTP status code 404 (Not Found) if the user is not found
                 return NotFound();
             }
+
+            // Publish PublishCalorieIntakeCreatedMessage. 
+            _UserMessagePublisher.
 
             // Return HTTP status code 200 (OK) with the user data
             return Ok(user);
