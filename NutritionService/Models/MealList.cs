@@ -5,5 +5,5 @@ namespace NutritionService.Models;
 public class MealList
 {
     public DateOnly DateOnly { get; set; }
-    private List<Meal> Meals { get; set; }
+    public List<Meal> Meals { get; set; }
 }
