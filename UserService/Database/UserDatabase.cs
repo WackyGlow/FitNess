@@ -66,6 +66,7 @@ public class UserDatabase
     public User CreateUser(User user)
     {
         // Insert the user into the database
+        user.Id = GetUsers().Count;
         _users.InsertOne(user);
 
         // Return the created user
