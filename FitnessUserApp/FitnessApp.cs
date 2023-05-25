@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EasyNetQ;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +13,11 @@ namespace FitnessUserApp
         HttpClient client = new HttpClient();
         string apiUrl = "https://localhost:7184/User";
 
+        private IBus bus;
+        private const string exchangeName = "fitnessApp_exchange";
+        private const string queueName = "fitnessApp_queue";
+        private const string routingKey = "fitnessApp_routing_key";
+
         public FitnessApp()
         {
             InitializeComponent();
@@ -19,10 +25,26 @@ namespace FitnessUserApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Connect to the RabbitMQ server
+            bus = RabbitHutch.CreateBus("amqps://cmcbjlme:aF-QmhuXS-dFiVX8SMUDzYLk0v9dGO8i@hawk.rmq.cloudamqp.com/cmcbjlme");
 
+            // Declare an exchange
+            bus.Advanced.ExchangeDeclare(exchangeName, "fanout");
+
+            // Declare a queue
+            bus.Advanced.QueueDeclare(queueName);
+
+            // Bind the queue to the exchange
+            bus.Advanced.Bind(exchangeName, queueName, routingKey);
         }
 
-        private async void sendRequest_Click(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Close the bus connection when the form is closing
+            bus?.Dispose();
+        }
+
+        private async void sendRequestHTTP_Click(object sender, EventArgs e)
         {
             string _firstName = fNameField.Text;
             string _lastName = lNameField.Text;
@@ -64,7 +86,7 @@ namespace FitnessUserApp
                     // Parse the response body if necessary
 
                     HttpStatusCode statusCode = response.StatusCode;
-                    succesLabel.Text = statusCode.ToString();
+                    succesLabelHTTP.Text = statusCode.ToString();
                 }
                 else
                 {
@@ -74,7 +96,7 @@ namespace FitnessUserApp
                     HttpStatusCode statusCode = response.StatusCode;
                     string reasonPhrase = response.ReasonPhrase;
 
-                    succesLabel.Text = "!Some Error Happened!";
+                    succesLabelHTTP.Text = "!Some Error Happened!";
 
                     // Handle the error based on the status code or response content
                     // For example, you can throw a custom exception or display an error message to the user
@@ -87,6 +109,38 @@ namespace FitnessUserApp
                 // You can log the exception or display an error message to the user
                 Console.WriteLine($"An error occurred while calling the API: {ex.Message}");
             }
+        }
+
+        private void sendRequestMessage_Click(object sender, EventArgs e)
+        {
+            string _firstName = fNameField.Text;
+            string _lastName = lNameField.Text;
+            int _age = int.Parse(ageField.Text);
+            string _sex = shreksField.Text;
+            double _weight = double.Parse(weightField.Text);
+            double _desiredWeight = double.Parse(desWeightField.Text);
+            double _height = double.Parse(HeightField.Text);
+            double _lossPrWeek = double.Parse(wLossPerWeekField.Text);
+
+            var data = new
+            {
+                FirstName = _firstName,
+                LastName = _lastName,
+                Age = _age,
+                Sex = _sex,
+                Weight = _weight,
+                DesiredWeight = _desiredWeight,
+                Height = _height,
+                WeightLossPerWeek = _lossPrWeek
+            };
+
+            // Serialize the object to JSON format
+            string jsonBody = JsonConvert.SerializeObject(data);
+
+            // Publish the message to the exchange with the specified routing key
+            bus.PubSub.Publish(jsonBody, exchangeName);
+
+            successLabelMessage.Text = "Message published successfully!";
         }
     }
 }

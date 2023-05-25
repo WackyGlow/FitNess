@@ -38,8 +38,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.succesLabel = new System.Windows.Forms.Label();
-            this.sendRequest = new System.Windows.Forms.Button();
+            this.succesLabelHTTP = new System.Windows.Forms.Label();
+            this.sendRequestHTTP = new System.Windows.Forms.Button();
             this.HeightField = new System.Windows.Forms.TextBox();
             this.shreksField = new System.Windows.Forms.TextBox();
             this.ageField = new System.Windows.Forms.TextBox();
@@ -53,6 +53,8 @@
             this.weightField = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.sendRequestMessage = new System.Windows.Forms.Button();
+            this.successLabelMessage = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -153,8 +155,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panel2.Controls.Add(this.succesLabel);
-            this.panel2.Controls.Add(this.sendRequest);
+            this.panel2.Controls.Add(this.successLabelMessage);
+            this.panel2.Controls.Add(this.sendRequestMessage);
+            this.panel2.Controls.Add(this.succesLabelHTTP);
+            this.panel2.Controls.Add(this.sendRequestHTTP);
             this.panel2.Controls.Add(this.HeightField);
             this.panel2.Controls.Add(this.shreksField);
             this.panel2.Controls.Add(this.ageField);
@@ -179,25 +183,25 @@
             this.panel2.Size = new System.Drawing.Size(303, 342);
             this.panel2.TabIndex = 8;
             // 
-            // succesLabel
+            // succesLabelHTTP
             // 
-            this.succesLabel.AutoSize = true;
-            this.succesLabel.Location = new System.Drawing.Point(86, 322);
-            this.succesLabel.Name = "succesLabel";
-            this.succesLabel.Size = new System.Drawing.Size(16, 13);
-            this.succesLabel.TabIndex = 21;
-            this.succesLabel.Text = "...";
+            this.succesLabelHTTP.AutoSize = true;
+            this.succesLabelHTTP.Location = new System.Drawing.Point(5, 292);
+            this.succesLabelHTTP.Name = "succesLabelHTTP";
+            this.succesLabelHTTP.Size = new System.Drawing.Size(16, 13);
+            this.succesLabelHTTP.TabIndex = 21;
+            this.succesLabelHTTP.Text = "...";
             // 
-            // sendRequest
+            // sendRequestHTTP
             // 
-            this.sendRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendRequest.Location = new System.Drawing.Point(4, 308);
-            this.sendRequest.Name = "sendRequest";
-            this.sendRequest.Size = new System.Drawing.Size(75, 28);
-            this.sendRequest.TabIndex = 20;
-            this.sendRequest.Text = "Send";
-            this.sendRequest.UseVisualStyleBackColor = true;
-            this.sendRequest.Click += new System.EventHandler(this.sendRequest_Click);
+            this.sendRequestHTTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendRequestHTTP.Location = new System.Drawing.Point(4, 308);
+            this.sendRequestHTTP.Name = "sendRequestHTTP";
+            this.sendRequestHTTP.Size = new System.Drawing.Size(117, 28);
+            this.sendRequestHTTP.TabIndex = 20;
+            this.sendRequestHTTP.Text = "HTTP Send";
+            this.sendRequestHTTP.UseVisualStyleBackColor = true;
+            this.sendRequestHTTP.Click += new System.EventHandler(this.sendRequestHTTP_Click);
             // 
             // HeightField
             // 
@@ -324,6 +328,26 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Weight";
             // 
+            // sendRequestMessage
+            // 
+            this.sendRequestMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendRequestMessage.Location = new System.Drawing.Point(127, 308);
+            this.sendRequestMessage.Name = "sendRequestMessage";
+            this.sendRequestMessage.Size = new System.Drawing.Size(169, 28);
+            this.sendRequestMessage.TabIndex = 22;
+            this.sendRequestMessage.Text = "Messaging Send";
+            this.sendRequestMessage.UseVisualStyleBackColor = true;
+            this.sendRequestMessage.Click += new System.EventHandler(this.sendRequestMessage_Click);
+            // 
+            // successLabelMessage
+            // 
+            this.successLabelMessage.AutoSize = true;
+            this.successLabelMessage.Location = new System.Drawing.Point(130, 292);
+            this.successLabelMessage.Name = "successLabelMessage";
+            this.successLabelMessage.Size = new System.Drawing.Size(16, 13);
+            this.successLabelMessage.TabIndex = 23;
+            this.successLabelMessage.Text = "...";
+            // 
             // FitnessApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,8 +395,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button sendRequest;
-        private System.Windows.Forms.Label succesLabel;
+        private System.Windows.Forms.Button sendRequestHTTP;
+        private System.Windows.Forms.Label succesLabelHTTP;
+        private System.Windows.Forms.Label successLabelMessage;
+        private System.Windows.Forms.Button sendRequestMessage;
     }
 }
 
