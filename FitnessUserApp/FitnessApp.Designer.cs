@@ -38,6 +38,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.succesLabel = new System.Windows.Forms.Label();
+            this.sendRequest = new System.Windows.Forms.Button();
             this.HeightField = new System.Windows.Forms.TextBox();
             this.shreksField = new System.Windows.Forms.TextBox();
             this.ageField = new System.Windows.Forms.TextBox();
@@ -51,8 +53,6 @@
             this.weightField = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.sendRequest = new System.Windows.Forms.Button();
-            this.succesLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@
             // fNameField
             // 
             this.fNameField.Location = new System.Drawing.Point(3, 19);
-            this.fNameField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fNameField.Margin = new System.Windows.Forms.Padding(2);
             this.fNameField.Name = "fNameField";
             this.fNameField.Size = new System.Drawing.Size(144, 20);
             this.fNameField.TabIndex = 1;
@@ -80,7 +80,7 @@
             // lNameField
             // 
             this.lNameField.Location = new System.Drawing.Point(153, 19);
-            this.lNameField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lNameField.Margin = new System.Windows.Forms.Padding(2);
             this.lNameField.Name = "lNameField";
             this.lNameField.Size = new System.Drawing.Size(144, 20);
             this.lNameField.TabIndex = 3;
@@ -123,7 +123,7 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(313, 75);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(303, 342);
             this.panel1.TabIndex = 7;
@@ -174,15 +174,35 @@
             this.panel2.Controls.Add(this.lNameField);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(5, 75);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(303, 342);
             this.panel2.TabIndex = 8;
             // 
+            // succesLabel
+            // 
+            this.succesLabel.AutoSize = true;
+            this.succesLabel.Location = new System.Drawing.Point(86, 322);
+            this.succesLabel.Name = "succesLabel";
+            this.succesLabel.Size = new System.Drawing.Size(16, 13);
+            this.succesLabel.TabIndex = 21;
+            this.succesLabel.Text = "...";
+            // 
+            // sendRequest
+            // 
+            this.sendRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendRequest.Location = new System.Drawing.Point(4, 308);
+            this.sendRequest.Name = "sendRequest";
+            this.sendRequest.Size = new System.Drawing.Size(75, 28);
+            this.sendRequest.TabIndex = 20;
+            this.sendRequest.Text = "Send";
+            this.sendRequest.UseVisualStyleBackColor = true;
+            this.sendRequest.Click += new System.EventHandler(this.sendRequest_Click);
+            // 
             // HeightField
             // 
             this.HeightField.Location = new System.Drawing.Point(3, 158);
-            this.HeightField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HeightField.Margin = new System.Windows.Forms.Padding(2);
             this.HeightField.Name = "HeightField";
             this.HeightField.Size = new System.Drawing.Size(144, 20);
             this.HeightField.TabIndex = 19;
@@ -190,7 +210,7 @@
             // shreksField
             // 
             this.shreksField.Location = new System.Drawing.Point(153, 61);
-            this.shreksField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.shreksField.Margin = new System.Windows.Forms.Padding(2);
             this.shreksField.Name = "shreksField";
             this.shreksField.Size = new System.Drawing.Size(144, 20);
             this.shreksField.TabIndex = 18;
@@ -199,7 +219,7 @@
             // ageField
             // 
             this.ageField.Location = new System.Drawing.Point(2, 61);
-            this.ageField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ageField.Margin = new System.Windows.Forms.Padding(2);
             this.ageField.Name = "ageField";
             this.ageField.Size = new System.Drawing.Size(144, 20);
             this.ageField.TabIndex = 17;
@@ -240,7 +260,7 @@
             // wLossPerWeekField
             // 
             this.wLossPerWeekField.Location = new System.Drawing.Point(155, 158);
-            this.wLossPerWeekField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wLossPerWeekField.Margin = new System.Windows.Forms.Padding(2);
             this.wLossPerWeekField.Name = "wLossPerWeekField";
             this.wLossPerWeekField.Size = new System.Drawing.Size(141, 20);
             this.wLossPerWeekField.TabIndex = 13;
@@ -269,7 +289,7 @@
             // desWeightField
             // 
             this.desWeightField.Location = new System.Drawing.Point(155, 117);
-            this.desWeightField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.desWeightField.Margin = new System.Windows.Forms.Padding(2);
             this.desWeightField.Name = "desWeightField";
             this.desWeightField.Size = new System.Drawing.Size(141, 20);
             this.desWeightField.TabIndex = 10;
@@ -277,7 +297,7 @@
             // weightField
             // 
             this.weightField.Location = new System.Drawing.Point(3, 117);
-            this.weightField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.weightField.Margin = new System.Windows.Forms.Padding(2);
             this.weightField.Name = "weightField";
             this.weightField.Size = new System.Drawing.Size(144, 20);
             this.weightField.TabIndex = 9;
@@ -304,26 +324,6 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Weight";
             // 
-            // sendRequest
-            // 
-            this.sendRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendRequest.Location = new System.Drawing.Point(4, 308);
-            this.sendRequest.Name = "sendRequest";
-            this.sendRequest.Size = new System.Drawing.Size(75, 28);
-            this.sendRequest.TabIndex = 20;
-            this.sendRequest.Text = "Send";
-            this.sendRequest.UseVisualStyleBackColor = true;
-            this.sendRequest.Click += new System.EventHandler(this.sendRequest_Click);
-            // 
-            // succesLabel
-            // 
-            this.succesLabel.AutoSize = true;
-            this.succesLabel.Location = new System.Drawing.Point(86, 322);
-            this.succesLabel.Name = "succesLabel";
-            this.succesLabel.Size = new System.Drawing.Size(16, 13);
-            this.succesLabel.TabIndex = 21;
-            this.succesLabel.Text = "...";
-            // 
             // FitnessApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,7 +334,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TitleLable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FitnessApp";
             this.Text = "Fitness Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);

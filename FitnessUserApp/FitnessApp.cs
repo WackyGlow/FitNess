@@ -25,7 +25,7 @@ namespace FitnessUserApp
         private async void sendRequest_Click(object sender, EventArgs e)
         {
             string _firstName = fNameField.Text;
-            string _lastName = fNameField.Text;
+            string _lastName = lNameField.Text;
             int _age = int.Parse(ageField.Text);
             string _sex = shreksField.Text;
             double _weight = double.Parse(weightField.Text);
@@ -42,7 +42,7 @@ namespace FitnessUserApp
                 Weight = _weight,
                 DesiredWeight = _desiredWeight,
                 Height = _height,
-                LossPrWeek = _lossPrWeek                
+                WeightLossPerWeek = _lossPrWeek
             };
 
             //Serialize the object to JSON format using Newtonsoft.Json
