@@ -65,10 +65,14 @@ public class UserDatabase
     /// </returns>
     public User CreateUser(User user)
     {
-        // Insert the user into the database
-        user.Id = GetUsers().Count;
-        _users.InsertOne(user);
+        //Generates a random number within a specified range.
+        Random random = new Random();
+        int randomInt = GetUsers().Count +random.Next(1000000,9999999);
 
+        // Insert the user into the database, With nearly random ID
+        user.Id = randomInt;
+        _users.InsertOne(user);
+      
         // Return the created user
         return user;
     }
