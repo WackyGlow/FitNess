@@ -10,7 +10,7 @@ namespace FitnessUserApp
     public partial class FitnessApp : Form
     {
         HttpClient client = new HttpClient();
-        string apiUrl = "https://localhost:7184/user";
+        string apiUrl = "https://localhost:7184/User";
 
         public FitnessApp()
         {
