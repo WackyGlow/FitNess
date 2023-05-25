@@ -1,12 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{4D147D5E-F6E1-47F2-892E-0CDD01A4FB60}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{4D147D5E-F6E1-47F2-892E-0CDD01A4FB60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{19270D43-23C8-41AB-A163-E740D7A4DF69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{19270D43-23C8-41AB-A163-E740D7A4DF69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutService", "WorkoutService\WorkoutService.csproj", "{BA92A9D1-0669-4A96-9549-BC2DB8ABFA83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkoutService", "WorkoutService\WorkoutService.csproj", "{BA92A9D1-0669-4A96-9549-BC2DB8ABFA83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionService", "NutritionService\NutritionService.csproj", "{E7F4E170-CD60-4A08-BC8D-CA37BBB68DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutritionService", "NutritionService\NutritionService.csproj", "{E7F4E170-CD60-4A08-BC8D-CA37BBB68DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessUserApp", "FitnessUserApp\FitnessUserApp.csproj", "{65AE1BB4-6F70-4057-BF0D-F0CE706E9269}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,15 @@ Global
 		{E7F4E170-CD60-4A08-BC8D-CA37BBB68DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7F4E170-CD60-4A08-BC8D-CA37BBB68DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7F4E170-CD60-4A08-BC8D-CA37BBB68DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65AE1BB4-6F70-4057-BF0D-F0CE706E9269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65AE1BB4-6F70-4057-BF0D-F0CE706E9269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65AE1BB4-6F70-4057-BF0D-F0CE706E9269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65AE1BB4-6F70-4057-BF0D-F0CE706E9269}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3722C72B-5B96-4FE1-9F52-919A0BEE0E12}
 	EndGlobalSection
 EndGlobal
