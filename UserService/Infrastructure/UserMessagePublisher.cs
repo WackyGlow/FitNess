@@ -33,7 +33,7 @@ namespace UserService.Infrastructure
                     
                 };
 
-                bus.PubSub.Publish(message);
+                bus.PubSub.Publish(message, "userCalorieIntake");
             }
 
         }

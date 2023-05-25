@@ -43,9 +43,6 @@ namespace UserService.Controllers
                 return NotFound();
             }
 
-            // Publish PublishCalorieIntakeCreatedMessage. 
-            _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
-
             // Return HTTP status code 200 (OK) with the user data
             return Ok(user);
         }
@@ -67,6 +64,9 @@ namespace UserService.Controllers
 
             // Insert the user into the database
             _UserDatabase.CreateUser(user);
+
+            // Publish PublishCalorieIntakeCreatedMessage. 
+            _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
 
             // Return HTTP status code 200 (OK) to indicate successful user creation
             return Ok();
