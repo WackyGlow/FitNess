@@ -1,6 +1,11 @@
-﻿namespace WorkoutService.Conrollers;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class WorkoutController
+namespace WorkoutService.Conrollers;
+
+
+[ApiController]
+[Route("[controller]")]
+public class WorkoutController : ControllerBase
 {
     
 }
