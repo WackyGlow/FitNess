@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UserService.Infrastructure;
-using static UserService.Infrastructure.MessagePublisher;
+using static UserService.Infrastructure.UserMessagePublisher;
 
 var builder = WebApplication.CreateBuilder(args);
 

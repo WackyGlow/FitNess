@@ -59,17 +59,23 @@ namespace UserService.Controllers
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
         {
-            // Create user logic here
-            // Replace with your actual implementation
+            try
+            {
+                // Insert the user into the database
+                _UserDatabase.CreateUser(user);
 
-            // Insert the user into the database
-            _UserDatabase.CreateUser(user);
+                // Publish PublishCalorieIntakeCreatedMessage. 
+                _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
 
-            // Publish PublishCalorieIntakeCreatedMessage. 
-            _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
+                return Ok();
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+            
 
             // Return HTTP status code 200 (OK) to indicate successful user creation
-            return Ok();
+            
         }
 
         /// <summary>
