@@ -32,12 +32,14 @@ public class WorkoutCollection
         oldWorkout.UserId = workoutIntensity.UserId;
         oldWorkout.WorkoutId = workoutIntensity.WorkoutId;
         oldWorkout.WorkOutIntensity = workoutIntensity.WorkOutIntensity;
-        
+        _workout.DeleteOne(w => w.UserId == oldWorkout.UserId);
+        _workout.InsertOne(oldWorkout);
+
     }
 
     public void AddWorkoutIntensity(WorkoutIntensity workoutIntensity)
     {
-        
+        _workout.InsertOne(workoutIntensity);
     }
     
 }
