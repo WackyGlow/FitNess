@@ -19,7 +19,7 @@ public class MessageListener
     {
         using (var bus = RabbitHutch.CreateBus(_connectionString))
         {
-            bus.PubSub.Subscribe<UserDataMessage>("",HandleUserDataMessage, x => x.WithTopic(""));
+            bus.PubSub.Subscribe<UserDataMessage>("",HandleUserDataMessage, x => x.WithTopic("userCalorieIntake"));
         }
         lock (this)
         {
@@ -29,6 +29,6 @@ public class MessageListener
 
     private void HandleUserDataMessage(UserDataMessage message)
     {
-        
+        Console.WriteLine(message);
     }
 }
