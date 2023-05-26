@@ -13,6 +13,11 @@ namespace UserService.Infrastructure
             bus = RabbitHutch.CreateBus(connectionString);
         }
 
+        public void Dispose()
+        {
+            bus.Dispose();
+        }
+
         public void PublishCalorieIntakeCreatedMessage(User user)
         {
             var message = new UserDataMessage
@@ -29,9 +34,5 @@ namespace UserService.Infrastructure
             bus.PubSub.Publish(message, "userCalorieIntake");
         }
 
-        public void Dispose()
-        {
-            bus.Dispose();
-        }
     }
 }

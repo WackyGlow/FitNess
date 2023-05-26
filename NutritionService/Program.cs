@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
 }
 
 Task.Factory.StartNew(() => new MessageListener(app.Services, cloudAMQPConnectionString).start());
+Console.WriteLine("Listening for messages. Press Enter to exit.");
+Console.ReadLine();
 
 app.UseHttpsRedirection();
 
