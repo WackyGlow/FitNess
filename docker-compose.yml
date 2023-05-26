@@ -13,6 +13,7 @@ services:
       context: .
       dockerfile: UserService/Dockerfile
 
+
   workoutservice:
     image: ${DOCKER_REGISTRY-}workoutservice
     build:
