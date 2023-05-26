@@ -16,17 +16,17 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 Task.Factory.StartNew(() => new MessageListener(app.Services, cloudAMQPConnectionString).start());
 Console.WriteLine("Listening for messages. Press Enter to exit.");
 Console.ReadLine();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
