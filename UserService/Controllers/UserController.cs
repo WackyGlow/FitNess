@@ -67,15 +67,12 @@ namespace UserService.Controllers
                 // Publish PublishCalorieIntakeCreatedMessage. 
                 _UserMessagePublisher.PublishCalorieIntakeCreatedMessage(user);
 
+                // Return HTTP status code 200 (OK) to indicate successful user creation
                 return Ok();
             }
             catch (Exception ex) {
                 throw new Exception(ex.Message);
-            }
-            
-
-            // Return HTTP status code 200 (OK) to indicate successful user creation
-            
+            }            
         }
 
         /// <summary>
