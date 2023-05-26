@@ -29,13 +29,13 @@ namespace FitnessUserApp
             bus = RabbitHutch.CreateBus("amqps://cmcbjlme:aF-QmhuXS-dFiVX8SMUDzYLk0v9dGO8i@hawk.rmq.cloudamqp.com/cmcbjlme");
 
             // Declare an exchange
-            bus.Advanced.ExchangeDeclare(exchangeName, "fanout");
+            var exName = bus.Advanced.ExchangeDeclare(exchangeName, "fanout");
 
             // Declare a queue
-            bus.Advanced.QueueDeclare(queueName);
+            var qName = bus.Advanced.QueueDeclare(queueName);
 
             // Bind the queue to the exchange
-            bus.Advanced.Bind(exchangeName, queueName, routingKey);
+            bus.Advanced.Bind(exName, qName, routingKey);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
