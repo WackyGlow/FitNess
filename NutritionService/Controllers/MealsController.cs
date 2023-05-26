@@ -16,7 +16,7 @@ namespace NutritionService.Controllers
         private MealsCollection _mealsCollection = new MealsCollection();
             
         [HttpPost]
-        public MealList AddMealList([FromBody] MealList meals)
+        public async Task<MealList> AddMealList([FromBody] MealList meals)
         {
             meals.DateOnly = DateOnly.FromDateTime(DateTime.Now);
            return _mealsCollection.AddMealsList(meals);
