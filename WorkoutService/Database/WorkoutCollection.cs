@@ -26,9 +26,20 @@ public class WorkoutCollection
 
     }
 
-    public WorkoutIntensity SetWorkOutIntensity(WorkoutIntensity workoutIntensity)
+    public void SetWorkOutIntensity(WorkoutIntensity workoutIntensity)
     {
-        
+        var oldWorkout = GetWorkOutIntensity(workoutIntensity.UserId);
+        oldWorkout.UserId = workoutIntensity.UserId;
+        oldWorkout.WorkoutId = workoutIntensity.WorkoutId;
+        oldWorkout.WorkOutIntensity = workoutIntensity.WorkOutIntensity;
+        _workout.DeleteOne(w => w.UserId == oldWorkout.UserId);
+        _workout.InsertOne(oldWorkout);
+
+    }
+
+    public void AddWorkoutIntensity(WorkoutIntensity workoutIntensity)
+    {
+        _workout.InsertOne(workoutIntensity);
     }
     
 }
