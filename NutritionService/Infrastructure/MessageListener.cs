@@ -37,7 +37,8 @@ public class MessageListener
     private void HandleUserDataMessage(UserDataMessage message)
     {
         // Process the received message
-        Console.WriteLine("Received message: ID: " + message.Id + " | Weight: " + message.Weight + " | Height: " + message.Height + " | Age :" + message.Age + " | Sex: " + message.Sex + " | KgLossPerWeek: " + message.KgLossPerWeek);
+        Console.WriteLine("Received message: ID: " + message.Id + " | Weight: " + message.Weight + " | Height: " + message.Height 
+            + " | Age :" + message.Age + " | Sex: " + message.Sex + " | KgLossPerWeek: " + message.KgLossPerWeek);
     }
 
     /// <summary>
