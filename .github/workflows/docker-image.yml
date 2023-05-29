@@ -28,7 +28,7 @@ jobs:
         context: .
         push: true
         tags: gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}:${{ github.sha }}
-        builder: ${{ github.repository }}/.github/workflows/docker/Dockerfile
+        builder: Dockerfile
       env:
         PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
