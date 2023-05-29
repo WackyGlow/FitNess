@@ -27,11 +27,11 @@ jobs:
         PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       run: |
-        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-workout-service:${{ github.sha }} ./WorkoutService
+        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-workout-service:${{ github.sha }} ./WorkoutService/Dockerfile
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-workout-service:${{ github.sha }}
 
-        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-nutrition-service:${{ github.sha }} ./NutritionService
+        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-nutrition-service:${{ github.sha }} ./NutritionService/Dockerfile
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-nutrition-service:${{ github.sha }}
 
-        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }} ./UserService
+        docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }} ./UserService/Dockerfile
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }}
