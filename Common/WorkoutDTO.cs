@@ -2,5 +2,5 @@
 
 public class WorkoutDTO
 {
-    public double Intensity { get; set; }
+    public double Intensity { get; set; } 
 }
