@@ -57,7 +57,7 @@ jobs:
     #  uses: google-github-actions/auth@v1
     #  with:
     #    service_account: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
-    #    project_id: ${{ env.PROJECT_ID }}
+    #    project_id: ${{ env.PROJECT_ID }} 
     
     #- name: Automatic Tagging of Releases
     #  id: increment-git-tag 
@@ -104,26 +104,3 @@ jobs:
         with:
           name: Test Results
           path: TestResults
-
-  #tests:
-  #  name: Unit Testing
-  #  runs-on: windows-latest
-  #  steps:
-  #    - uses: actions/checkout@v2.1.0
-  #    - run: dotnet test
-
-  #build_and_test2:
-  #  runs-on: ubuntu-latest
-  #  name: Run all unit tests
-  #  steps:
-  #    - uses: actions/checkout@v3
-  #    - name: Setup dotnet
-  #      uses: actions/setup-dotnet@v3
-  #      with:
-  #        dotnet-version: '6.0.x'
-  #    - name: Install dependencies
-  #      run: dotnet restore
-  #    - name: Build
-  #      run: dotnet build
-  #    - name: Test with the dotnet CLI
-  #      run: dotnet test
