@@ -94,7 +94,7 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Build
-        run: dotnet build --configuration Release ./FitNess.sln
+        run: dotnet build --configuration Release
 
       - name: Run Unit Tests
         run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
