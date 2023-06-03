@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUN_NUMBER: fitness-$GITHUB_RUN_NUMBER
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.ARTIFACT_SERVICE_ACCOUNT_KEY }}
       PROJECT_ID: dls-exam
     steps:
     - name: Checkout
