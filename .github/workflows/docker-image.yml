@@ -36,5 +36,6 @@ jobs:
         docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }}
 
-  run_tests:
-    name: Run Tests  
+  #run_tests:
+  #  name: Run Tests  
+  #  steps:
