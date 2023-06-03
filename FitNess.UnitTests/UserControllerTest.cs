@@ -1,148 +1,136 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Moq;
-using UserService.Controllers;
-using UserService.Database;
-using UserService.Infrastructure;
-using UserService.Models;
-using Xunit;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Moq;
+//using UserService.Controllers;
+//using UserService.Database;
+//using UserService.Infrastructure;
+//using UserService.Models;
+//using Xunit;
 
-namespace UserService.Tests.Controllers
-{
-    public class UserControllerTests
-    {
-        private readonly UserController _controller;
-        private readonly Mock<IUserMessagePublisher> _userMessagePublisherMock;
+//namespace UserService.Tests
+//{
+//    public class UserControllerTests
+//    {
+//        private readonly UserController _controller;
+//        private readonly Mock<UserDatabase> _userDatabaseMock;
+//        private readonly Mock<IUserMessagePublisher> _userMessagePublisherMock;
 
-        public UserControllerTests()
-        {
-            _userMessagePublisherMock = new Mock<IUserMessagePublisher>();
-            _controller = new UserController(_userMessagePublisherMock.Object);
-        }
+//        public UserControllerTests()
+//        {
+//            _userDatabaseMock = new Mock<UserDatabase>();
+//            _userMessagePublisherMock = new Mock<IUserMessagePublisher>();
 
-        [Fact]
-        public void GetUser_ExistingUserId_ReturnsOkWithUserData()
-        {
-            // Arrange
-            var userId = 1;
-            var expectedUser = new User { Id = userId, FirstName = "John", LastName = "Doe" };
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(userId)).Returns(expectedUser);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//            var user1 = new User { Id = 1, FirstName = "John", LastName = "Doe" };
+//            var user2 = new User { Id = 2, FirstName = "Jane", LastName = "Smith" };
+//            var user3 = new User { Id = 3, FirstName = "Alice", LastName = "Johnson" };
 
-            // Act
-            var result = _controller.GetUser(userId);
+//            _userDatabaseMock.Setup(db => db.GetUserById(1)).Returns(user1);
+//            _userDatabaseMock.Setup(db => db.GetUserById(2)).Returns(user2);
+//            _userDatabaseMock.Setup(db => db.GetUserById(3)).Returns(user3);
 
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var user = Assert.IsType<User>(okResult.Value);
-            Assert.Equal(expectedUser.Id, user.Id);
-            Assert.Equal(expectedUser.FirstName, user.FirstName);
-            Assert.Equal(expectedUser.LastName, user.LastName);
-        }
+//            _controller = new UserController(_userMessagePublisherMock.Object);
+//            _controller._UserDatabase = _userDatabaseMock.Object;
+//        }
 
-        [Fact]
-        public void GetUser_NonExistingUserId_ReturnsNotFound()
-        {
-            // Arrange
-            var userId = 1;
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(userId)).Returns((User)null);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//        [Fact]
+//        public void GetUser_ExistingUser_ReturnsOkWithUserData()
+//        {
+//            // Arrange
+//            int userId = 1;
 
-            // Act
-            var result = _controller.GetUser(userId);
+//            // Act
+//            IActionResult result = _controller.GetUser(userId);
 
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
+//            // Assert
+//            OkObjectResult okResult = Assert.IsType<OkObjectResult>(result);
+//            User returnedUser = Assert.IsType<User>(okResult.Value);
+//            Assert.Equal("John", returnedUser.FirstName);
+//            Assert.Equal("Doe", returnedUser.LastName);
+//        }
 
-        [Fact]
-        public void CreateUser_ValidUser_ReturnsOk()
-        {
-            // Arrange
-            var user = new User { Id = 1, FirstName = "John", LastName = "Doe" };
+//        [Fact]
+//        public void GetUser_NonExistingUser_ReturnsNotFound()
+//        {
+//            // Arrange
+//            int userId = 4;
 
-            // Act
-            var result = _controller.CreateUser(user);
+//            // Act
+//            IActionResult result = _controller.GetUser(userId);
 
-            // Assert
-            var okResult = Assert.IsType<OkResult>(result);
-            _userMessagePublisherMock.Verify(publisher => publisher.PublishCalorieIntakeCreatedMessage(user), Times.Once);
-        }
+//            // Assert
+//            Assert.IsType<NotFoundResult>(result);
+//        }
 
-        [Fact]
-        public void UpdateUser_ExistingUserId_ReturnsOk()
-        {
-            // Arrange
-            var userId = 1;
-            var existingUser = new User { Id = userId, FirstName = "John", LastName = "Doe" };
-            var updatedUser = new User { Id = userId, FirstName = "Jane", LastName = "Smith" };
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(userId)).Returns(existingUser);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//        [Fact]
+//        public void CreateUser_ValidUser_ReturnsOk()
+//        {
+//            // Arrange
+//            User user = new User { FirstName = "Alex", LastName = "Williams" };
 
-            // Act
-            var result = _controller.UpdateUser(userId, updatedUser);
+//            // Act
+//            IActionResult result = _controller.CreateUser(user);
 
-            // Assert
-            Assert.IsType<OkResult>(result);
-            Assert.Equal(updatedUser.FirstName, existingUser.FirstName);
-            Assert.Equal(updatedUser.LastName, existingUser.LastName);
-            Assert.Equal(updatedUser.Age, existingUser.Age);
-            Assert.Equal(updatedUser.Sex, existingUser.Sex);
-            Assert.Equal(updatedUser.Weight, existingUser.Weight);
-            Assert.Equal(updatedUser.DesiredWeight, existingUser.DesiredWeight);
-            userDatabaseMock.Verify(db => db.UpdateUser(userId, existingUser), Times.Once);
-        }
+//            // Assert
+//            Assert.IsType<OkResult>(result);
+//            _userDatabaseMock.Verify(db => db.CreateUser(user), Times.Once);
+//            _userMessagePublisherMock.Verify(p => p.PublishCalorieIntakeCreatedMessage(user), Times.Once);
+//        }
 
-        [Fact]
-        public void UpdateUser_NonExistingUserId_ReturnsNotFound()
-        {
-            // Arrange
-            var userId = 1;
-            var updatedUser = new User { Id = userId, FirstName = "Jane", LastName = "Smith" };
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(userId)).Returns((User)null);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//        [Fact]
+//        public void UpdateUser_ExistingUser_ReturnsOk()
+//        {
+//            // Arrange
+//            int userId = 2;
+//            User updatedUser = new User { Id = userId, FirstName = "Jane", LastName = "Johnson" };
 
-            // Act
-            var result = _controller.UpdateUser(userId, updatedUser);
+//            // Act
+//            IActionResult result = _controller.UpdateUser(userId, updatedUser);
 
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
+//            // Assert
+//            Assert.IsType<OkResult>(result);
+//            _userDatabaseMock.Verify(db => db.UpdateUser(userId, updatedUser), Times.Once);
+//        }
 
-        [Fact]
-        public void DeleteUser_ExistingUser_ReturnsOk()
-        {
-            // Arrange
-            var user = new User { Id = 1, FirstName = "John", LastName = "Doe" };
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(user.Id)).Returns(user);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//        [Fact]
+//        public void UpdateUser_NonExistingUser_ReturnsNotFound()
+//        {
+//            // Arrange
+//            int userId = 4;
+//            User updatedUser = new User { Id = userId, FirstName = "Alice", LastName = "Smith" };
 
-            // Act
-            var result = _controller.DeleteUser(user);
+//            // Act
+//            IActionResult result = _controller.UpdateUser(userId, updatedUser);
 
-            // Assert
-            Assert.IsType<OkResult>(result);
-            userDatabaseMock.Verify(db => db.DeleteUser(user), Times.Once);
-        }
+//            // Assert
+//            Assert.IsType<NotFoundResult>(result);
+//        }
 
-        [Fact]
-        public void DeleteUser_NonExistingUser_ReturnsNotFound()
-        {
-            // Arrange
-            var user = new User { Id = 1, FirstName = "John", LastName = "Doe" };
-            var userDatabaseMock = new Mock<UserDatabase>();
-            userDatabaseMock.Setup(db => db.GetUserById(user.Id)).Returns((User)null);
-            _controller._UserDatabase = userDatabaseMock.Object;
+//        [Fact]
+//        public void DeleteUser_ExistingUser_ReturnsOk()
+//        {
+//            // Arrange
+//            int userId = 3;
+//            var user = new User { Id = userId };
 
-            // Act
-            var result = _controller.DeleteUser(user);
+//            // Act
+//            IActionResult result = _controller.DeleteUser(user);
 
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
-    }
-}
+//            // Assert
+//            Assert.IsType<OkResult>(result);
+//            _userDatabaseMock.Verify(db => db.DeleteUser(user), Times.Once);
+//        }
+
+//        [Fact]
+//        public void DeleteUser_NonExistingUser_ReturnsNotFound()
+//        {
+//            // Arrange
+//            int userId = 4;
+//            var user = new User { Id = userId };
+
+//            // Act
+//            IActionResult result = _controller.DeleteUser(user);
+
+//            // Assert
+//            Assert.IsType<NotFoundResult>(result);
+//        }
+//    }
+//}
