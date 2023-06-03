@@ -1,9 +1,9 @@
 ﻿namespace UserService.Tests
 {
-    public class UserControllerTests
+    public class UserMessagePublisherTests
     {
         [Fact]
-        public void ControllerAlwaysPasses1()
+        public void AlwaysPasses1()
         {
             // Arrange
 
@@ -14,7 +14,7 @@
         }
 
         [Fact]
-        public void ControllerAlwaysPasses2()
+        public void AlwaysPasses2()
         {
             // Arrange
 
@@ -25,7 +25,7 @@
         }
 
         [Fact]
-        public void ControllerAlwaysFails1()
+        public void AlwaysFails1()
         {
             // Arrange
 
@@ -36,7 +36,7 @@
         }
 
         [Fact]
-        public void ControllerAlwaysFails2()
+        public void AlwaysFails2()
         {
             // Arrange
 
