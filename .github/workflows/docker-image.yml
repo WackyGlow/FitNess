@@ -94,7 +94,7 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
 
       - name: Run Unit Tests
         run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
@@ -105,12 +105,12 @@ jobs:
           name: Test Results
           path: TestResults
 
-  tests:
-    name: Unit Testing
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2.1.0
-      - run: dotnet test
+  #tests:
+  #  name: Unit Testing
+  #  runs-on: windows-latest
+  #  steps:
+  #    - uses: actions/checkout@v2.1.0
+  #    - run: dotnet test
 
   #build_and_test2:
   #  runs-on: ubuntu-latest
