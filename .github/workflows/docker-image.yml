@@ -97,7 +97,7 @@ jobs:
         run: dotnet build --configuration Release --project ./FitNess.sln
 
       - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~FitNess.UnitTests.UserControllerTest\;FullyQualifiedName~FitNess.UnitTests.UserMessagePublisherTests --logger "trx;LogFileName=testresults.trx"
+        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
