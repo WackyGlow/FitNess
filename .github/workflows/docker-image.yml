@@ -36,6 +36,26 @@ jobs:
         docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }}
 
-  #run_tests:
-  #  name: Run Tests  
-  #  steps:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~UnitTests
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: TestResults
