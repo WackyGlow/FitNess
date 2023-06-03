@@ -24,26 +24,26 @@
             Assert.True(true);
         }
 
-        [Fact]
-        public void ControllerAlwaysFails1()
-        {
-            // Arrange
+        //[Fact]
+        //public void ControllerAlwaysFails1()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-            Assert.True(false);
-        }
+        //    // Assert
+        //    Assert.True(false);
+        //}
 
-        [Fact]
-        public void ControllerAlwaysFails2()
-        {
-            // Arrange
+        //[Fact]
+        //public void ControllerAlwaysFails2()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-            Assert.True(false);
-        }
+        //    // Assert
+        //    Assert.True(false);
+        //}
     }
 }
