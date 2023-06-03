@@ -81,6 +81,7 @@ jobs:
         docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }}
 
   build-and-test:
+    name: Run all unit tests
     runs-on: ubuntu-latest
 
     steps:
@@ -93,10 +94,10 @@ jobs:
           dotnet-version: 5.0.x
 
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release --project ./FitNess.sln
 
       - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~FitNess.UnitTests.UserControllerTest\;FullyQualifiedName~FitNess.UnitTests.UserMessagePublisherTests
+        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~FitNess.UnitTests.UserControllerTest\;FullyQualifiedName~FitNess.UnitTests.UserMessagePublisherTests --logger "trx;LogFileName=testresults.trx"
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
@@ -104,18 +105,18 @@ jobs:
           name: Test Results
           path: TestResults
 
-  build_and_test2:
-    runs-on: ubuntu-latest
-    name: Run all unit tests
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0.x'
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build
-      - name: Test with the dotnet CLI
-        run: dotnet test
+  #build_and_test2:
+  #  runs-on: ubuntu-latest
+  #  name: Run all unit tests
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #    - name: Setup dotnet
+  #      uses: actions/setup-dotnet@v3
+  #      with:
+  #        dotnet-version: '6.0.x'
+  #    - name: Install dependencies
+  #      run: dotnet restore
+  #    - name: Build
+  #      run: dotnet build
+  #    - name: Test with the dotnet CLI
+  #      run: dotnet test
