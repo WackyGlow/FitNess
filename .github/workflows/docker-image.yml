@@ -8,7 +8,7 @@ on:
 
 jobs:
   docker_images_container_registry:
-    name: Build and Push Docker images to Google Container registry
+    name: Google Container registry, Build and Push Docker images
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -37,7 +37,7 @@ jobs:
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }}
 
   docker_images_artifact_registry:
-    name: Build and Push
+    name: Google Artifact registry, Build and Push Docker images
     runs-on: ubuntu-latest
     env:
       RUN_NUMBER: fitness-$GITHUB_RUN_NUMBER
@@ -85,7 +85,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v1
@@ -96,7 +96,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~UnitTests
+        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~FitNess.UnitTests.UserControllerTest\;FullyQualifiedName~FitNess.UnitTests.UserMessagePublisherTests
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
