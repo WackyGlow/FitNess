@@ -105,6 +105,13 @@ jobs:
           name: Test Results
           path: TestResults
 
+  tests:
+    name: Unit Testing
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - run: dotnet test
+
   #build_and_test2:
   #  runs-on: ubuntu-latest
   #  name: Run all unit tests
