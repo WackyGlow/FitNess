@@ -7,9 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  docker_images:
+    name: Build and Push Docker images to Google Container registry
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -36,3 +35,6 @@ jobs:
 
         docker build -t gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
         docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}-user-service:${{ github.sha }}
+
+  run_tests:
+    name: Run Tests  
