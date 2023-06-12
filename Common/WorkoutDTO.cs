@@ -7,6 +7,6 @@ public class WorkoutDTO
 {
     /// <summary>
     /// Gets or sets the intensity of the workout.
-    /// </summary>
+    /// </summary> 
     public double Intensity { get; set; } 
 }
