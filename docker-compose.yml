@@ -1,22 +1,35 @@
 version: '3.4'
 
 services:
+  # Service for the Nutrition Service
   nutritionservice:
+    # Specify the Docker image for the Nutrition Service
     image: ${DOCKER_REGISTRY-}nutritionservice
+    # Build configuration for the Nutrition Service
     build:
+      # Set the build context to the current directory
       context: .
+      # Specify the path to the Dockerfile for building the Nutrition Service image
       dockerfile: NutritionService/Dockerfile
 
+  # Service for the User Service
   userservice:
+    # Specify the Docker image for the User Service
     image: ${DOCKER_REGISTRY-}userservice
+    # Build configuration for the User Service
     build:
+      # Set the build context to the current directory
       context: .
+      # Specify the path to the Dockerfile for building the User Service image
       dockerfile: UserService/Dockerfile
 
-
+  # Service for the Workout Service
   workoutservice:
+    # Specify the Docker image for the Workout Service
     image: ${DOCKER_REGISTRY-}workoutservice
+    # Build configuration for the Workout Service
     build:
+      # Set the build context to the current directory
       context: .
+      # Specify the path to the Dockerfile for building the Workout Service image
       dockerfile: WorkoutService/Dockerfile
-
