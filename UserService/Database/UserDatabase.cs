@@ -57,11 +57,11 @@ public class UserDatabase
     }
 
     /// <summary>
-    /// Creates a new user in the database.
+    /// Creates a new user and inserts it into the database.
     /// </summary>
     /// <param name="user">The User object representing the user to create.</param>
     /// <returns>
-    /// Returns the created User object.
+    /// Returns a User object representing the created user.
     /// </returns>
     public User CreateUser(User user)
     {

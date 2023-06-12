@@ -18,21 +18,17 @@ namespace UserService.Controllers
         }
 
         /// <summary>
-        /// Retrieves a user by their ID.
+        /// Retrieves a user by ID.
         /// </summary>
-        /// <param name="id">The ID of the user.</param>
+        /// <param name="id">The ID of the user to retrieve.</param>
         /// <returns>
         /// Returns an IActionResult representing the HTTP response.
         ///  - If the user is found, returns HTTP status code 200 (OK) with the user data.
         ///  - If the user is not found, returns HTTP status code 404 (Not Found).
-        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
         /// </returns>
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
-            // Retrieve user logic here
-            // Replace with your actual implementation
-
             // Get the user from the UserDatabase using the provided ID
             var user = _UserDatabase.GetUserById(id);
 
@@ -53,8 +49,8 @@ namespace UserService.Controllers
         /// <param name="user">The User object representing the user to create.</param>
         /// <returns>
         /// Returns an IActionResult representing the HTTP response.
-        ///  - If the user is successfully created, returns HTTP status code 200 (OK).
-        ///  - If there is an error or an exception occurs, returns an appropriate HTTP status code.
+        ///  - If the user is created successfully, returns HTTP status code 200 (OK).
+        ///  - If there is an error or exception during user creation, throws an Exception.
         /// </returns>
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
@@ -89,9 +85,6 @@ namespace UserService.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User user)
         {
-            // Update user logic here
-            // Replace with your actual implementation
-
             // Get the existing user from the database
             var existingUser = _UserDatabase.GetUserById(id);
 
@@ -130,9 +123,6 @@ namespace UserService.Controllers
         [HttpDelete]
         public IActionResult DeleteUser(User user)
         {
-            // Delete user logic here
-            // Replace with your actual implementation
-
             // Get the existing user from the database
             var existingUser = user;
 
@@ -149,8 +139,6 @@ namespace UserService.Controllers
             // Return HTTP status code 200 (OK) to indicate successful user deletion
             return Ok();
         }
-
-        // Placeholder methods, replace with actual implementation
 
     }
 }
