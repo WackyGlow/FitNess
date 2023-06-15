@@ -29,9 +29,9 @@ jobs:
         docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER -f NutritionService/Dockerfile .
         docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:build-$GITHUB_RUN_NUMBER -f UserService/Dockerfile .
         
-        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest
-        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
-        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
+        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:build-$GITHUB_RUN_NUMBER
+        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER
+        docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:build-$GITHUB_RUN_NUMBER
   
     - name: deploy to GKE
       env:
