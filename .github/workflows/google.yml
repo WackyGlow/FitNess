@@ -25,9 +25,9 @@ jobs:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
         gcloud auth configure-docker us-central1-docker.pkg.dev
-        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest -f WorkoutService/Dockerfile .
-        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest -f NutritionService/Dockerfile .
-        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest -f UserService/Dockerfile .
+        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:build-$GITHUB_RUN_NUMBER -f WorkoutService/Dockerfile .
+        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER -f NutritionService/Dockerfile .
+        docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:build-$GITHUB_RUN_NUMBER -f UserService/Dockerfile .
         
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
@@ -37,6 +37,6 @@ jobs:
       env:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
-        gcloud container cluster get-credentials autopilot-cluster-1 --region us-central1
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
         sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resources.yaml
         kubectl apply -f resources.yaml
