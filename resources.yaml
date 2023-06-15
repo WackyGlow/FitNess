@@ -28,9 +28,12 @@ spec:
         app: fitness
     spec:
       containers:
-      - name: fitness
-        image: |
-            us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/workoutservice:build-$GITHUB_RUN_NUMBER
-            us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER
-            us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/userservice:build-$GITHUB_RUN_NUMBER
+      - name: workservice
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/workoutservice:build-$GITHUB_RUN_NUMBER
+      - name: workservice
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER
+      - name: workservice
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/userservice:build-$GITHUB_RUN_NUMBER
+            
+        
 
