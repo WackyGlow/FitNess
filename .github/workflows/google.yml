@@ -18,6 +18,7 @@ jobs:
       with:
         project_id: ${{ secrets.GOOGLE_PROJECT }}
         service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+        install_components: 'gke-gcloud-auth-plugin'
         export_default_credentials: true
     - name: build and push the docker images
       env:
@@ -31,4 +32,11 @@ jobs:
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
-
+  
+    - name: deploy to GKE
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container cluster get-credentials autopilot-cluster-1 --region us-central1
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resources.yaml
+        kubectl apply -f resources.yaml
