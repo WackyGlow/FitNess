@@ -48,3 +48,28 @@ jobs:
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
       # This step builds Docker images for the services and pushes them to Google Container Registry.
       # The images will be used for deployment to the GKE cluster.
+      
+    # step 4: Deploy Docker Images to Google Kubernetes Engine
+    - name: deploy to GKE - WorkoutService
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
+        kubectl apply -f WorkoutService/resources.yaml
+
+    - name: deploy to GKE - NutritionService
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
+        kubectl apply -f NutritionService/resources.yaml
+
+    - name: deploy to GKE - UserService
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
+        kubectl apply -f UserService/resources.yaml
