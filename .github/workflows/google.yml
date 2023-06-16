@@ -33,10 +33,23 @@ jobs:
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
   
-    - name: deploy to GKE
+    - name: deploy to GKE - WorkoutService
       env:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
         gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resources.yaml
-        kubectl apply -f resources.yaml
+        kubectl apply -f WorkoutService/resources.yaml
+
+    - name: deploy to GKE - NutritionService
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+        kubectl apply -f NutritionService/resources.yaml
+
+    - name: deploy to GKE - UserService
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+        kubectl apply -f UserService/resources.yaml
