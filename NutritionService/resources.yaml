@@ -28,8 +28,9 @@ spec:
         app: fitness
     spec:
       containers:
-      - name: userservice
+      - name: nutritionservice
         image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/nutritionservice:latest
             
         
 
+ 
