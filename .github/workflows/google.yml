@@ -10,9 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
+    # Step 1: Code Checkout
     - name: code checkout
       uses: actions/checkout@v2
+      # Checkout the source code from the repository
+      # This step ensures that the latest code is used for the build and deployment process.
       
+    # Step 2: Install the gcloud CLI
     - name: install the gcloud cli
       uses: google-github-actions/setup-gcloud@v0
       with:
@@ -20,39 +24,27 @@ jobs:
         service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
         install_components: 'gke-gcloud-auth-plugin'
         export_default_credentials: true
+      # Install and configure the Google Cloud SDK (gcloud) CLI
+      # This step enables interaction with Google Cloud services and resources.
+      
+    # Step 3: Build and Push Docker Images
     - name: build and push the docker images
       env:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
+        # Configure Docker authentication with Google Container Registry
         gcloud auth configure-docker us-central1-docker.pkg.dev
+        
+        # Build Docker images for the services
+        # Replace the image URLs and Dockerfile paths as needed
         docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest -f WorkoutService/Dockerfile .
         docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest -f NutritionService/Dockerfile .
         docker build -t us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest -f UserService/Dockerfile .
         
+        # Push Docker images to Google Container Registry
+        # Replace the image URLs as needed
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
         docker push us-central1-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
-  
-    - name: deploy to GKE - WorkoutService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
-        kubectl apply -f WorkoutService/resources.yaml
-
-    - name: deploy to GKE - NutritionService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
-        kubectl apply -f NutritionService/resources.yaml
-
-    - name: deploy to GKE - UserService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
-        kubectl apply -f UserService/resources.yaml
+      # This step builds Docker images for the services and pushes them to Google Container Registry.
+      # The images will be used for deployment to the GKE cluster.
