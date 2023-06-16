@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: nginx
+    app: fitness
   ports:
   - port: 80
     targetPort: 80
@@ -29,11 +29,11 @@ spec:
     spec:
       containers:
       - name: workservice
-        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/workoutservice:build-$GITHUB_RUN_NUMBER
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/workoutservice:latest
       - name: workservice
-        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/nutritionservice:build-$GITHUB_RUN_NUMBER
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/nutritionservice:latest
       - name: workservice
-        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/userservice:build-$GITHUB_RUN_NUMBER
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/fitness/userservice:latest
             
         
 
