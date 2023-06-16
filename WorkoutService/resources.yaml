@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fitness-workoutservice
+  name: workoutservice
 spec:
   type: LoadBalancer
   selector:
-    app: fitness-workoutservice
+    app: workoutservice
   ports:
   - port: 80
     targetPort: 80
@@ -14,18 +14,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fitness-workoutservice
+  name: workoutservice
   labels:
-    app: fitness-workoutservice
+    app: workoutservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fitness-workoutservice
+      app: workoutservice
   template:
     metadata:
       labels:
-        app: fitness-workoutservice
+        app: workoutservice
     spec:
       containers:
       - name: workoutservice
