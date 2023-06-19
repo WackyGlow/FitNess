@@ -1,11 +1,36 @@
-#name: Build and Deploy to GKE - Frederik
+name: Run all test
 
-#on:
-#  push:
-#    branches:
-#    - 'main'
+on:
+  push:
+    branches:
+    - 'main'
 
-#jobs:
+jobs:
+  build-and-test:
+    name: Run all unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Build
+        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
+
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: TestResults
+
 #  deploy:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -118,27 +143,3 @@
 #    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
 #    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }}
 
-#  build-and-test:
-#    name: Run all unit tests
-#    runs-on: ubuntu-latest
-
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-
-#      - name: Set up .NET
-#        uses: actions/setup-dotnet@v1
-#        with:
-#          dotnet-version: 7.0.x
-
-#      - name: Build
-#        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
-
-#      - name: Run Unit Tests
-#        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
-
-#      - name: Publish test results
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: Test Results
-#          path: TestResults
