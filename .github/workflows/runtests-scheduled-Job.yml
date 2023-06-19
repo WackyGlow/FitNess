@@ -1,0 +1,43 @@
+# Name of the workflow
+name: Scheduled Job
+
+# Define the event that triggers the workflow
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Runs every 15 minutes
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+
+# Define the jobs to be executed
+jobs:
+  build-and-test:
+    # Name of the job 
+    name: Run all unit tests
+    # Specify the runner for the job
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed in the job
+    steps:
+        # This step checks out the repository and makes the repository contents available to subsequent steps.
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+        # This step sets up the .NET environment for the workflow and installs the specified version of .NET.
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
+
+        # This step builds the project using the dotnet build command with the specified configuration.
+      - name: Build
+        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
+
+        # This step runs the unit tests using the dotnet test command with the specified configuration and logger.
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
+
+        # This step publishes the test results as an artifact, making them available for later analysis or reporting.
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: TestResults
