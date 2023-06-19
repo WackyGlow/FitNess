@@ -1,144 +1,144 @@
-name: Build and Deploy to GKE - Frederik
+#name: Build and Deploy to GKE - Frederik
 
-on:
-  push:
-    branches:
-    - 'main'
+#on:
+#  push:
+#    branches:
+#    - 'main'
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    
-    # Step 1: Code Checkout
-    - name: code checkout
-      uses: actions/checkout@v2
-      # Checkout the source code from the repository
-      # This step ensures that the latest code is used for the build and deployment process.
-      
-    # Step 2: Install the gcloud CLI
-    - name: install the gcloud cli
-      uses: google-github-actions/setup-gcloud@v0
-      with:
-        project_id: ${{ secrets.PROJECT_ID }}
-        service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-        install_components: 'gke-gcloud-auth-plugin'
-        export_default_credentials: true
-      # Install and configure the Google Cloud SDK (gcloud) CLI
-      # This step enables interaction with Google Cloud services and resources.
-      
-    # Step 3: Build and Push Docker Images
-    - name: build and push the docker images
-      env:
-        GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-      run: |
-        # Configure Docker authentication with Google Container Registry
-        gcloud auth configure-docker europe-west3-docker.pkg.dev
-        
-        # Build Docker images for the services
-        # Replace the image URLs and Dockerfile paths as needed
-        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest -f WorkoutService/Dockerfile .
-        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest -f NutritionService/Dockerfile .
-        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest -f UserService/Dockerfile .
-        
-        # Push Docker images to Google Container Registry
-        # Replace the image URLs as needed
-        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest
-        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest
-        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest
-      # This step builds Docker images for the services and pushes them to Google Container Registry.
-      # The images will be used for deployment to the GKE cluster.
-      
-    # step 4: Deploy Docker Images to Google Kubernetes Engine
-    #- name: deploy to GKE - WorkoutService
-    #  env:
-    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-    #  run: |
-    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
-    #    kubectl apply -f WorkoutService/resources.yaml
-
-    #- name: deploy to GKE - NutritionService
-    #  env:
-    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-    #  run: |
-    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
-    #    kubectl apply -f NutritionService/resources.yaml
-
-    #- name: deploy to GKE - UserService
-    #  env:
-    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-    #  run: |
-    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
-    #    kubectl apply -f UserService/resources.yaml
-
-#  docker_images_artifact_registry:
-#    name: Google Artifact registry, Build and Push Docker images
+#jobs:
+#  deploy:
 #    runs-on: ubuntu-latest
-#    env:
-#      RUN_NUMBER: fitness-$GITHUB_RUN_NUMBER
-#      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.ARTIFACT_SERVICE_ACCOUNT_KEY }}
-#      PROJECT_ID: dls-exam
 #    steps:
-#    - name: Checkout
-#      uses: actions/checkout@v3
-
-#    - uses: google-github-actions/setup-gcloud@main
-#      with:
-#        service_account_key: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
-#        project_id: ${{ env.PROJECT_ID }}
-#        export_default_credentials: true
-
-    #- name: Authenticate with Google Cloud
-    #  uses: google-github-actions/auth@v1
-    #  with:
-    #    service_account: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
-    #    project_id: ${{ env.PROJECT_ID }} 
     
-    #- name: Automatic Tagging of Releases
-    #  id: increment-git-tag 
-    #  run: |
-    #    bash ./scripts/git_update.sh -v major
+#    # Step 1: Code Checkout
+#    - name: code checkout
+#      uses: actions/checkout@v2
+#      # Checkout the source code from the repository
+#      # This step ensures that the latest code is used for the build and deployment process.
+      
+#    # Step 2: Install the gcloud CLI
+#    - name: install the gcloud cli
+#      uses: google-github-actions/setup-gcloud@v0
+#      with:
+#        project_id: ${{ secrets.PROJECT_ID }}
+#        service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+#        install_components: 'gke-gcloud-auth-plugin'
+#        export_default_credentials: true
+#      # Install and configure the Google Cloud SDK (gcloud) CLI
+#      # This step enables interaction with Google Cloud services and resources.
+      
+#    # Step 3: Build and Push Docker Images
+#    - name: build and push the docker images
+#      env:
+#        GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+#      run: |
+#        # Configure Docker authentication with Google Container Registry
+#        gcloud auth configure-docker europe-west3-docker.pkg.dev
+        
+#        # Build Docker images for the services
+#        # Replace the image URLs and Dockerfile paths as needed
+#        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest -f WorkoutService/Dockerfile .
+#        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest -f NutritionService/Dockerfile .
+#        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest -f UserService/Dockerfile .
+        
+#        # Push Docker images to Google Container Registry
+#        # Replace the image URLs as needed
+#        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest
+#        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest
+#        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest
+#      # This step builds Docker images for the services and pushes them to Google Container Registry.
+#      # The images will be used for deployment to the GKE cluster.
+      
+#    # step 4: Deploy Docker Images to Google Kubernetes Engine
+#    #- name: deploy to GKE - WorkoutService
+#    #  env:
+#    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+#    #  run: |
+#    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+#    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
+#    #    kubectl apply -f WorkoutService/resources.yaml
 
-    #- name: Configure Docker Client
-    #  run: |
-    #    gcloud auth configure-docker --quiet
-    #    gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+#    #- name: deploy to GKE - NutritionService
+#    #  env:
+#    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+#    #  run: |
+#    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+#    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
+#    #    kubectl apply -f NutritionService/resources.yaml
 
-    #- name: Build and push Docker images 
-    #  run: |
-    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-workout-service:${{ github.sha }} -f WorkoutService/Dockerfile .
-    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-workout-service:${{ github.sha }}
+#    #- name: deploy to GKE - UserService
+#    #  env:
+#    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+#    #  run: |
+#    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+#    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
+#    #    kubectl apply -f UserService/resources.yaml
 
-    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-nutrition-service:${{ github.sha }} -f NutritionService/Dockerfile .
-    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-nutrition-service:${{ github.sha }}
+##  docker_images_artifact_registry:
+##    name: Google Artifact registry, Build and Push Docker images
+##    runs-on: ubuntu-latest
+##    env:
+##      RUN_NUMBER: fitness-$GITHUB_RUN_NUMBER
+##      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.ARTIFACT_SERVICE_ACCOUNT_KEY }}
+##      PROJECT_ID: dls-exam
+##    steps:
+##    - name: Checkout
+##      uses: actions/checkout@v3
 
-    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
-    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }}
+##    - uses: google-github-actions/setup-gcloud@main
+##      with:
+##        service_account_key: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+##        project_id: ${{ env.PROJECT_ID }}
+##        export_default_credentials: true
 
-  build-and-test:
-    name: Run all unit tests
-    runs-on: ubuntu-latest
+#    #- name: Authenticate with Google Cloud
+#    #  uses: google-github-actions/auth@v1
+#    #  with:
+#    #    service_account: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+#    #    project_id: ${{ env.PROJECT_ID }} 
+    
+#    #- name: Automatic Tagging of Releases
+#    #  id: increment-git-tag 
+#    #  run: |
+#    #    bash ./scripts/git_update.sh -v major
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#    #- name: Configure Docker Client
+#    #  run: |
+#    #    gcloud auth configure-docker --quiet
+#    #    gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 7.0.x
+#    #- name: Build and push Docker images 
+#    #  run: |
+#    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-workout-service:${{ github.sha }} -f WorkoutService/Dockerfile .
+#    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-workout-service:${{ github.sha }}
 
-      - name: Build
-        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
+#    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-nutrition-service:${{ github.sha }} -f NutritionService/Dockerfile .
+#    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-nutrition-service:${{ github.sha }}
 
-      - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
+#    #    docker build -t europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }} -f UserService/Dockerfile .
+#    #    docker push europe-west3-docker.pkg.dev/$PROJECT_ID/images/${{ env.RUN_NUMBER }}-user-service:${{ github.sha }}
 
-      - name: Publish test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: Test Results
-          path: TestResults
+#  build-and-test:
+#    name: Run all unit tests
+#    runs-on: ubuntu-latest
+
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+
+#      - name: Set up .NET
+#        uses: actions/setup-dotnet@v1
+#        with:
+#          dotnet-version: 7.0.x
+
+#      - name: Build
+#        run: dotnet build --configuration Release ./FitNess.UnitTests/FitNess.UnitTests.csproj
+
+#      - name: Run Unit Tests
+#        run: dotnet test --configuration Release --no-build ./FitNess.UnitTests/FitNess.UnitTests.csproj --logger "trx;LogFileName=testresults.trx"
+
+#      - name: Publish test results
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: Test Results
+#          path: TestResults
