@@ -14,7 +14,7 @@ jobs:
     - name: code checkout
       uses: actions/checkout@v2
       # Checkout the source code from the repository
-      # This step ensures that the latest code is used for the build and deployment process.
+      # This step ensures that the latest code is used for the build and deployment process. 
       
     # Step 2: Install the gcloud CLI
     - name: install the gcloud cli
