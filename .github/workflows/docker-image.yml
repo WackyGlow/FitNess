@@ -37,42 +37,42 @@ jobs:
         
         # Build Docker images for the services
         # Replace the image URLs and Dockerfile paths as needed
-        docker build -t europe-west3-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest -f WorkoutService/Dockerfile .
-        docker build -t europe-west3-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest -f NutritionService/Dockerfile .
-        docker build -t europe-west3-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest -f UserService/Dockerfile .
+        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest -f WorkoutService/Dockerfile .
+        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest -f NutritionService/Dockerfile .
+        docker build -t europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest -f UserService/Dockerfile .
         
         # Push Docker images to Google Container Registry
         # Replace the image URLs as needed
-        docker push europe-west3-docker.pkg.dev/noted-reef-388208/fitness/workoutservice:latest
-        docker push europe-west3-docker.pkg.dev/noted-reef-388208/fitness/nutritionservice:latest
-        docker push europe-west3-docker.pkg.dev/noted-reef-388208/fitness/userservice:latest
+        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/workoutservice:latest
+        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/nutritionservice:latest
+        docker push europe-west3-docker.pkg.dev/dls-exam/dls-exam-demo/userservice:latest
       # This step builds Docker images for the services and pushes them to Google Container Registry.
       # The images will be used for deployment to the GKE cluster.
       
     # step 4: Deploy Docker Images to Google Kubernetes Engine
-    - name: deploy to GKE - WorkoutService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
-        kubectl apply -f WorkoutService/resources.yaml
+    #- name: deploy to GKE - WorkoutService
+    #  env:
+    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+    #  run: |
+    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" WorkoutService/resources.yaml
+    #    kubectl apply -f WorkoutService/resources.yaml
 
-    - name: deploy to GKE - NutritionService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
-        kubectl apply -f NutritionService/resources.yaml
+    #- name: deploy to GKE - NutritionService
+    #  env:
+    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+    #  run: |
+    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" NutritionService/resources.yaml
+    #    kubectl apply -f NutritionService/resources.yaml
 
-    - name: deploy to GKE - UserService
-      env:
-        GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-      run: |
-        gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
-        sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
-        kubectl apply -f UserService/resources.yaml
+    #- name: deploy to GKE - UserService
+    #  env:
+    #    GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+    #  run: |
+    #    gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+    #    sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" UserService/resources.yaml
+    #    kubectl apply -f UserService/resources.yaml
 
 #  docker_images_artifact_registry:
 #    name: Google Artifact registry, Build and Push Docker images
