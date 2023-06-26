@@ -3,9 +3,12 @@ name: Scheduled Job
 
 # Define the event that triggers the workflow
 on:
-  schedule:
-    - cron: '*/15 * * * *'  # Runs every 15 minutes
-    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+  push:
+    branches:
+    - 'main'
+  #schedule:
+    #- cron: '*/15 * * * *'  # Runs every 15 minutes
+    #- cron: '0 0 * * *'  # Runs every day at midnight UTC
 
 # Define the jobs to be executed
 jobs:
